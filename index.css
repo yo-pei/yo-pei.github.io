@@ -1,0 +1,209 @@
+:root {
+    --bg-color-1: #2c2f33; /* 暗くなりすぎないグレーがかったダークカラー */
+    --bg-color-2: #23272a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #b9bbbe;
+    --accent-red: #ff5e5e; /* 作業時のアクセントカラー */
+    --accent-green: #4ade80; /* 休憩時のアクセントカラー */
+    --accent-current: var(--accent-red);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    transition: background 0.5s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.session-tracker {
+    background: var(--card-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#session-count {
+    font-weight: 700;
+    color: var(--accent-current);
+    transition: color 0.3s ease;
+}
+
+.timer-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.timer-card:hover {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+}
+
+.mode-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 999px;
+    padding: 0.25rem;
+    gap: 0.5rem;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab:hover:not(.active) {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.active {
+    background: var(--accent-current);
+    color: var(--bg-color-2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.time-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.adjust-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adjust-btn:hover {
+    color: var(--text-primary);
+    background: var(--card-bg);
+}
+
+.adjust-btn:active {
+    transform: scale(0.9);
+}
+
+.timer-display {
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+    min-width: 200px;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.controls button {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
+}
+
+.controls button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.controls button:active:not(:disabled) {
+    transform: translateY(0) scale(0.95);
+}
+
+.controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#start-btn {
+    background: var(--accent-current);
+    color: var(--bg-color-2);
+    border-color: transparent;
+}
+
+#start-btn:hover:not(:disabled) {
+    background: var(--accent-current);
+    filter: brightness(1.1);
+}
+
+/* 休憩モードのテーマ設定 */
+body.break-mode {
+    --accent-current: var(--accent-green);
+}
